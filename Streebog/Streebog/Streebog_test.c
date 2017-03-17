@@ -22,8 +22,7 @@ static void HashPrint(HashContext *CTX)
 
 static void GetHashTest()
 {
-	printf("\n\nTest String 1: "
-		"323130393837363534333231303938373635343332313039383736353433323130393837363534333231303938373635343332313039383736353433323130\n\n");
+	printf("\n\nTest String 1: %s\n\n", test_string_1);
 	Init(CTX, 512);
 	Update(CTX, test_string_1, sizeof test_string_1);
 	Final(CTX);
@@ -33,8 +32,7 @@ static void GetHashTest()
 	Final(CTX);
 	HashPrint(CTX);
 
-	printf("\n\nTest String 2: "
-		"fbe2e5f0eee3c820fbeafaebef20fffbf0e1e0f0f520e0ed20e8ece0ebe5f0f2f120fff0eeec20f120faf2fee5e2202ce8f6f3ede220e8e6eee1e8f0f2d1202ce8f0f2e5e220e5d1\n\n");
+	printf("\n\nTest String 2: %s\n\n", test_string_2);
 	Init(CTX, 512);
 	Update(CTX, test_string_1, sizeof test_string_2);
 	Final(CTX);
@@ -85,8 +83,8 @@ int main()
 	printf("GOST 34.11 - 2012 \"Streebog\"\n");
 
 	GetHashTest();
-	GetHashFile("test.txt", 512);
-	GetHashFile("test.txt", 256);
+	GetHashFile(test_file_name, 512);
+	GetHashFile(test_file_name, 256);
 	
 	return 0;
 }
