@@ -17,6 +17,5 @@ typedef struct HashContext
 } HashContext;
 
 
-void Init(HashContext *CTX, uint16_t hash_size);
-void Update(HashContext *CTX, const uint8_t *m, size_t len);
-void Final(HashContext *CTX);
+void Hash_256(HashContext *CTX, const uint8_t *m, size_t len);
+void Hash_512(HashContext *CTX, const uint8_t *m, size_t len);

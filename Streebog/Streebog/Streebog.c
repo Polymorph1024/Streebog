@@ -60,7 +60,7 @@ static void L(uint8_t *state)
 	memcpy(state, out, 64);
 }
 
-// формирование временного ключа
+// формирование раундовых ключей
 static void GetKey(uint8_t *K, int i)
 {
 	X(K, C[i], K);
@@ -105,7 +105,7 @@ static void Padding(HashContext *CTX)
 	{
 		memset(t, 0x00, 64);	// обнуляем промежуточный вектор
 		memcpy(t, CTX->buffer, CTX->buf_size);	// пишем остаток сообщения в промежуточный вектор
-		t[CTX->buf_size] = 0x01;	// добавляем в нужное место единичку
+		t[CTX->buf_size] = 0x01;	// добавляем в нужное место единицу
 		memcpy(CTX->buffer, t, 64);	// кладем все, что получилось, обратно
 	}
 }
@@ -184,7 +184,6 @@ void Update(HashContext *CTX, const uint8_t *m, size_t len)
 
 void Final(HashContext *CTX)
 {
-	// Запускаем третий этап
 	Stage_3(CTX);
 	CTX->buf_size = 0;
 }

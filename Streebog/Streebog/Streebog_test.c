@@ -20,29 +20,6 @@ static void HashPrint(HashContext *CTX)
 	printf("\n\n");
 }
 
-static void GetHashTest()
-{
-	printf("\n\nTest String 1: %s\n\n", test_string_1);
-	Init(CTX, 512);
-	Update(CTX, test_string_1, sizeof test_string_1);
-	Final(CTX);
-	HashPrint(CTX);
-	Init(CTX, 256);
-	Update(CTX, test_string_1, sizeof test_string_1);
-	Final(CTX);
-	HashPrint(CTX);
-
-	printf("\n\nTest String 2: %s\n\n", test_string_2);
-	Init(CTX, 512);
-	Update(CTX, test_string_1, sizeof test_string_2);
-	Final(CTX);
-	HashPrint(CTX);
-	Init(CTX, 256);
-	Update(CTX, test_string_1, sizeof test_string_2);
-	Final(CTX);
-	HashPrint(CTX);
-}
-
 static void GetHashString(const char *str, int hash_size)
 {
 	uint8_t *buffer;
@@ -82,7 +59,10 @@ int main()
 
 	printf("GOST 34.11 - 2012 \"Streebog\"\n");
 
-	GetHashTest();
+	GetHashString(test_string_1, 512);
+	GetHashString(test_string_1, 256);
+	GetHashString(test_string_2, 512);
+	GetHashString(test_string_2, 256);
 	GetHashFile(test_file_name, 512);
 	GetHashFile(test_file_name, 256);
 	
